@@ -1,0 +1,4 @@
+node_modules/
+*.xpi
+dist/
+canary/node_modules/

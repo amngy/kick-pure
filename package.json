@@ -1,0 +1,8 @@
+{
+  "name": "kick-pure",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Kick Pure Firefox add-on: 1080p for logged-out viewers and a cleaner Kick.",
+  "license": "GPL-3.0-or-later",
+  "scripts": { "test": "node --test", "build": "node scripts/build-xpi.js", "canary": "node canary/canary.js" }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Kick Pure",
+  "version": "3.0.0",
+  "description": "A distraction-free Kick for people who just want to watch: 1080p without an account, no ads, no gambling, no mature or gamified clutter, and local follows.",
+  "icons": { "48": "icon.svg", "96": "icon.svg", "128": "icon.svg" },
+  "permissions": ["storage", "tabs", "alarms", "notifications"],
+  "host_permissions": ["https://kick.com/*", "https://*.kick.com/*"],
+  "background": { "scripts": ["rules.js", "background.js"] },
+  "content_scripts": [
+    {
+      "matches": ["https://kick.com/*", "https://*.kick.com/*"],
+      "js": ["rules.js", "page.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": ["https://kick.com/*", "https://*.kick.com/*"],
+      "js": ["rules.js", "clean.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": { "default_title": "Kick Pure", "default_popup": "popup.html", "default_icon": "icon.svg" },
+  "browser_specific_settings": {
+    "gecko": { "id": "kick-hd-unlock@local", "strict_min_version": "128.0" }
+  }
+}

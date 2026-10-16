@@ -1,0 +1,95 @@
+/* Kick Pure popup. Tokens first; everything below uses them. */
+:root {
+  color-scheme: light dark;
+  --bg: #fff; --surface: #f4f5f4; --line: #e6e8e7; --text: #141817; --muted: #667069;
+  --accent: #0e8a52; --on-accent: #fff; --live: #e5484d;
+  --warn-bg: #fff4df; --warn: #7a4f00;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0f0e; --surface: #171a19; --line: #252a28; --text: #ecefed; --muted: #8f9894;
+    --accent: #2bd47d; --on-accent: #04130b; --live: #ff6369;
+    --warn-bg: #2a2110; --warn: #f5b84a;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; width: 360px; height: 520px; display: flex; flex-direction: column; background: var(--bg); color: var(--text); font: 13px/1.4 system-ui, sans-serif; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.muted, small { color: var(--muted); font-size: 11.5px; }
+
+header { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; }
+header img { width: 24px; height: 24px; }
+header h1 { margin: 0; font-size: 15px; font-weight: 700; }
+header .grow, .grow { flex: 1; }
+.back { border: 0; background: none; padding: 2px 6px 2px 0; font-size: 20px; line-height: 1; color: var(--muted); }
+
+.warn { display: flex; width: calc(100% - 32px); margin: 0 16px 8px; padding: 8px 10px; border: 0; border-radius: 8px; background: var(--warn-bg); color: var(--warn); font-size: 12px; text-align: left; justify-content: space-between; gap: 8px; }
+
+main { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 12px; }
+section[hidden] { display: none; }
+h2 { margin: 14px 16px 6px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* Grouped card of rows */
+.group { margin: 0 16px 4px; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.group > * + * { border-top: 1px solid var(--line); }
+.item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border: 0; background: none; text-align: left; cursor: pointer; }
+.item .t { flex: 1; min-width: 0; }
+.item .t b { display: block; font-weight: 600; }
+.item .t small { display: block; }
+.chev { color: var(--muted); transition: transform .15s; }
+.item[aria-expanded="true"] .chev { transform: rotate(90deg); }
+.item .count { color: var(--muted); font-size: 11.5px; }
+.editor { padding: 0 12px 12px; }
+.editor small { display: block; }
+
+/* Toggle: a real checkbox, restyled */
+.switch { appearance: none; flex: none; width: 34px; height: 20px; margin: 0; border-radius: 10px; background: var(--line); position: relative; cursor: pointer; transition: background .15s; }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform .15s; box-shadow: 0 1px 2px #0004; }
+.switch:checked { background: var(--accent); }
+.switch:checked::after { transform: translateX(14px); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Following */
+.add { display: flex; gap: 6px; margin: 4px 16px 8px; }
+.add input { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }
+.btn { padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-weight: 600; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+#followCurrent { display: block; width: calc(100% - 32px); margin: 0 16px 8px; }
+#followList { list-style: none; margin: 0; padding: 0; }
+.ch { display: flex; align-items: center; gap: 11px; padding: 8px 16px; }
+.ch.off { opacity: .6; }
+.ch:hover { background: var(--surface); }
+.ava { width: 34px; height: 34px; flex: none; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-weight: 700; color: var(--muted); overflow: hidden; }
+.ava img { width: 100%; height: 100%; object-fit: cover; }
+.ch.live .ava { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--live); }
+.ch .i { flex: 1; min-width: 0; }
+.ch .i a { display: block; color: var(--text); font-weight: 600; text-decoration: none; }
+.ch .i a:hover { text-decoration: underline; }
+.ch .i span { display: block; color: var(--muted); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viewers { font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.x { border: 0; background: none; color: var(--muted); font-size: 16px; padding: 2px 6px; border-radius: 6px; }
+.x:hover { color: var(--text); background: var(--line); }
+.empty { padding: 28px 24px; text-align: center; color: var(--muted); }
+.empty b { display: block; color: var(--text); margin-bottom: 4px; }
+
+/* Self-check */
+.dotstate { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.dotstate.ok { background: var(--accent); }
+.dotstate.bad { background: var(--live); }
+.health .item { cursor: default; }
+
+/* Bottom tab bar */
+nav { display: flex; border-top: 1px solid var(--line); }
+nav button { flex: 1; padding: 11px 0; border: 0; background: none; color: var(--muted); font-weight: 600; }
+nav button[aria-selected="true"] { color: var(--accent); box-shadow: inset 0 2px 0 var(--accent); }
+body[data-view="health"] .warn { display: none; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+.chips:empty { display: none; }
+.chip { padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 12px; }
+.chip:not(.pick):hover { border-color: var(--live); }
+.chip.pick[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
+.chipinput { width: 100%; margin-top: 8px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Kick Pure</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <button class="back" id="back" aria-label="Back" hidden>‹</button>
+    <img src="icon.svg" alt="">
+    <h1 id="title">Kick Pure</h1>
+    <span class="grow"></span>
+    <span class="muted" id="liveCount" aria-live="polite"></span>
+  </header>
+  <button class="warn" id="warn" hidden></button>
+
+  <main>
+    <!-- Following -->
+    <section id="follows" role="tabpanel" aria-label="Following">
+      <button class="btn primary" id="followCurrent" hidden></button>
+      <form class="add" id="addForm">
+        <input type="text" id="addSlug" placeholder="Add channel: name or kick.com link" aria-label="Channel to follow" autocomplete="off">
+        <button class="btn" type="submit">Follow</button>
+      </form>
+      <ul id="followList"></ul>
+    </section>
+
+    <!-- Filters: rows expand to a list editor. Add a row to FILTERS in popup.js to grow this. -->
+    <section id="filters" role="tabpanel" aria-label="Filters" hidden>
+      <h2>Always applied</h2>
+      <div class="group" id="filtersMine"></div>
+      <h2>Built-in rules</h2>
+      <div class="group" id="filtersBuiltin"></div>
+    </section>
+
+    <!-- Settings: generated from SETTINGS in popup.js -->
+    <section id="settings" role="tabpanel" aria-label="Settings" hidden>
+      <div id="settingsGroups"></div>
+      <h2>More</h2>
+      <div class="group">
+        <button class="item" id="openHealth" type="button"><span class="t"><b>Self-check</b><small id="healthSummary"></small></span><span class="chev" aria-hidden="true">›</span></button>
+      </div>
+    </section>
+
+    <!-- Self-check detail view -->
+    <section id="health" aria-label="Self-check" hidden>
+      <p class="muted" style="margin:0 16px 8px">Kick Pure checks that its hooks still match Kick's site. Two misses in a row count as broken.</p>
+      <div class="group health" id="healthList"></div>
+    </section>
+  </main>
+
+  <nav role="tablist" id="tabs">
+    <button role="tab" id="tab-follows" data-view="follows" aria-selected="true">Following</button>
+    <button role="tab" id="tab-filters" data-view="filters" aria-selected="false">Filters</button>
+    <button role="tab" id="tab-settings" data-view="settings" aria-selected="false">Settings</button>
+  </nav>
+
+  <script src="rules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
